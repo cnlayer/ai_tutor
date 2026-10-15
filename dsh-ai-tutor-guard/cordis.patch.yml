@@ -13,7 +13,7 @@
 #       - 陪我聊天
 #       - 打游戏
 #
-# 也可在 Web 设置页（通用）直接编辑表单，改动会写回 profile patch 层，升级不丢失。
+# 保存即热生效（patchReload: live）。应用内设置表单需插件自带 client UI，尚未实现（见路线图）。
 
 - insert:
     - id: ai-tutor-guard

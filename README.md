@@ -11,7 +11,7 @@ v1.0 能力（PC 浏览器，`http://127.0.0.1:3090`）：
 
 v1.1 新增：
 
-- **家长监护**（`dsh-ai-tutor-guard`）：家长定义允许的话题白名单（默认仅作业辅导）+ 禁区关键词硬拦截；Web 设置页表单或 profile patch 编辑，见 [docs/家长监护.md](docs/家长监护.md)
+- **家长监护**（`dsh-ai-tutor-guard`）：家长定义允许的话题白名单（默认仅作业辅导）+ 禁区关键词硬拦截；当前通过 profile patch 编辑配置（应用内表单在路线图上），见 [docs/家长监护.md](docs/家长监护.md)
 
 ## 目录结构
 
@@ -52,12 +52,12 @@ dsh ai-tutor --port 3090 --no-open
 - **preset**（`dsh-ai-tutor/cordis.patch.yml`）：向 `agent-preset-registry` 注册 `ai-tutor` preset（引导式辅导人格 + fs/web/ask-user 工具），profile 层将其设为默认。
 - **界面瘦身**（`dsh-ai-tutor-kid/cordis.patch.yml`）：disable 无关 UI 行（轨迹、技能、工作区选择等），但保留 `ui-workspace`、`ui-sidebar-right`、`ui-plugin-manager` 挂载——它们是在其他插件 boot 期被解析的依赖，卸载会导致启动失败；入口 UI 用 CSS 后缀选择器隐藏。
 - **相机插件**（`dsh-ai-tutor-kid/client.js`）：React 组件注册进官方槽位 `conversation.input.left`（list 槽，注册需 `id`）；`getUserMedia` 预览（127.0.0.1 属安全上下文），canvas 截帧 + 椭圆圈选/裁剪编辑，最终 JPEG 写入 composer 的隐藏 `<input type=file>` 触发 change，完全复用 DSH 原生附件管线（限额、缩略图、草稿）。
-- **家长监护**（`dsh-ai-tutor-guard/index.js`）：host 插件两层防护——`ctx.systemPrompt.section` 注入家长话题白名单（order 100，紧跟人格）；`agent/pre-step` waterfall 对命中禁区关键词的消息，在给模型的副本末尾追加监护指令（会话日志保留孩子原文）。家长配置 = 插件 Config 的 volatile 字段，投影到 Web 设置页表单，改动写回 profile patch 层。
+- **家长监护**（`dsh-ai-tutor-guard/index.js`）：host 插件两层防护——`ctx.systemPrompt.section` 注入家长话题白名单（order 100，紧跟人格）；`agent/pre-step` waterfall 对命中禁区关键词的消息，在给模型的副本末尾追加监护指令（会话日志保留孩子原文）。家长配置 = 插件 Config 的 volatile 字段（`ctx.configForms` 可读写），写在 profile patch 层、升级不丢失；应用内表单需插件自带 client UI，尚未实现。
 
 ## 路线图
 
 - P1.1：新对话按钮、品牌名「AI 功课辅导」进 hero/侧栏
-- M1：preset 工具收紧（去掉 write/edit）、儿童 profile 存储隔离、浏览器 TTS、监护语义级分类（小模型判定替代关键词）
+- M1：preset 工具收紧（去掉 write/edit）、儿童 profile 存储隔离、浏览器 TTS、监护应用内表单（设置 → 通用 卡片 + 编辑对话框）、监护语义级分类（小模型判定替代关键词）
 - P2：平板 / 手机 APP
 
 ## 许可
