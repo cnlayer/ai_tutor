@@ -1,0 +1,20 @@
+# dsh-ai-tutor-guard bundle patch
+# 家长内容监护 host 插件。家长自定义白名单时，覆盖本行 config（完整对象）：
+#
+# - id: ai-tutor-guard
+#   config:
+#     enabled: true
+#     allowedTopics:
+#       - 写作业、功课讲解、错题订正等作业辅导内容
+#       - 英语单词与课文背诵
+#     extraPolicy: |
+#       周末下午 4 点前只允许数学和语文作业辅导。
+#     blockedKeywords:
+#       - 陪我聊天
+#       - 打游戏
+#
+# 也可在 Web 设置页（通用）直接编辑表单，改动会写回 profile patch 层，升级不丢失。
+
+- insert:
+    - id: ai-tutor-guard
+      name: '@local/dsh-ai-tutor-guard'

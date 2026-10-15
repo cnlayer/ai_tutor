@@ -115,9 +115,17 @@ journalctl -u ai-tutor | grep 'dsh web'   # 取最新 token URL
 
 ```bash
 cd ai_tutor && git pull
-dsh plugin --profile ai-tutor add ./dsh-ai-tutor ./dsh-ai-tutor-kid   # link: 依赖，重新解析
+# v1.1 起新增家长监护 bundle：link: 依赖不会自动装它的 npm 依赖，先装一次
+cd dsh-ai-tutor-guard && npm install --registry=https://registry.npmmirror.com && cd ..
+dsh plugin --profile ai-tutor add ./dsh-ai-tutor ./dsh-ai-tutor-kid ./dsh-ai-tutor-guard
 sudo systemctl restart ai-tutor
 ```
+
+## 8. 家长监护（v1.1）
+
+孩子端的聊天内容白名单（默认仅作业辅导）由家长定义。配置入口与规则见 [docs/家长监护.md](./家长监护.md)。
+
+服务器上家长改配置最稳妥的方式：SSH 登录后编辑 `~/.dsh/profiles/ai-tutor/cordis.patch.yml`（见文档），或先开 SSH 隧道再在 Web 设置页表单里改。
 
 ## 验证清单
 
@@ -125,3 +133,4 @@ sudo systemctl restart ai-tutor
 2. 发一句话建立对话 → 输入框左下出现 📷 按钮
 3. 拍照 → 圈选/裁剪 → 加入对话 → 发送 → 模型读图讲解（需视觉模型：bailian qwen3.8 系列）
 4. 思考链文本不显示，工具活动行（"已完成，用时 N 秒"）保留
+5. 监护：发「陪我玩游戏」→ 模型温和拒绝并引导回作业；Web 设置页「通用」里出现「AI 辅导内容监护」表单（loopback 访问可编辑）
