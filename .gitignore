@@ -1,0 +1,18 @@
+# Node
+node_modules/
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Local env overrides
+.env
+.env.local
+
+# DSH runtime artifacts (profile lives in ~/.dsh, not in this repo)
+.tmp/

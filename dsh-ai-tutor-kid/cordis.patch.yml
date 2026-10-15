@@ -1,0 +1,91 @@
+# ai_tutor 极简 PC 界面裁剪层（仅安装到 ai-tutor profile）。
+# 行 id 全部来自 @deepseek-ai/dsh-web-app 发行层，已逐行核对。
+# 保留：ui-layout / ui-sidebar(壳层,CSS隐藏) / ui-renderer / ui-web / ui-conversation /
+#       ui-chat / ui-session / ui-approval / ui-attachment / ui-voice-input /
+#       ui-model-selection / ui-input-trigger / ui-commands / ui-message-feedback /
+#       ui-user-questions / ui-tool / ui-theme / ui-shortcuts / ui-settings(general,models,account,web-search)
+
+# 默认 preset = ai-tutor（schema: default 为任意字符串，必填）
+- id: agent-preset-registry
+  config:
+    default: ai-tutor
+
+# 会话过程折叠到最简（思考链彻底隐藏由 kid 客户端插件 CSS 完成，见 Spike A）
+- id: ui-chat
+  config:
+    transcriptView: compact
+    performanceUsage: compact
+
+# —— 轨迹页 ——
+- id: ui-trajectory
+  disabled: true
+
+# —— 工作区：ui-workspace 行必须保留（提供 uiWorkspace 服务，sidebar/conversation/
+#    directory-picker 依赖）；入口 UI（hero 工作区选择器）由 kid CSS 隐藏 ——
+
+# —— 技能中心 ——
+- id: ui-skill
+  disabled: true
+
+# —— 编码代理功能面 ——
+- id: ui-goal
+  disabled: true
+- id: ui-jobs
+  disabled: true
+- id: ui-plan
+  disabled: true
+- id: ui-deliverables
+  disabled: true
+- id: ui-workflow-run
+  disabled: true
+- id: ui-subagent
+  disabled: true
+- id: ui-reference
+  disabled: true
+- id: ui-cordis
+  disabled: true
+
+# —— 桌面/导出/官方品牌 ——
+- id: ui-open-in-app
+  disabled: true
+- id: ui-brand-official
+  disabled: true
+
+# —— 插件管理：ui-plugin-manager 行保留（提供 pluginNavigation 服务，语音输入依赖），
+#    只禁用设置页入口 ——
+- id: ui-settings-plugins
+  disabled: true
+- id: ui-settings-plugin-inventory
+  disabled: true
+
+# —— 模式/权限选择器 ——
+- id: ui-agent-preset
+  disabled: true
+- id: ui-permission
+  disabled: true
+
+# —— 右侧栏：ui-sidebar-right 行保留（提供 sidebarRight 服务，ui-chat 依赖）；
+#    无面板注册者时右列宽度自动为 0。只禁用面板占用者 ——
+- id: ui-sidebar-documentpreview
+  disabled: true
+- id: ui-sidebar-browser
+  disabled: true
+- id: ui-sidebar-terminal
+  disabled: true
+- id: ui-sidebar-files
+  disabled: true
+
+# —— 面向开发者的设置页（保留 general/models/account/web-search）——
+- id: ui-settings-session-log
+  disabled: true
+- id: ui-settings-shell
+  disabled: true
+- id: ui-settings-agent-loop
+  disabled: true
+- id: ui-settings-subagent
+  disabled: true
+
+# —— kid 客户端插件：注入 CSS（隐藏侧边栏列 + 思考链）——
+- insert:
+    - id: ai-tutor-kid-ui
+      name: '@local/dsh-ai-tutor-kid'

@@ -1,0 +1,21 @@
+{
+  "name": "@local/dsh-ai-tutor-kid",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI 功课辅导（孩子端）：极简 PC 界面瘦身 + 拍照提问（相机、圈选、裁剪）。",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-layout"]
+    }
+  }
+}

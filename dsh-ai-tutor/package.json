@@ -1,0 +1,12 @@
+{
+  "name": "@local/dsh-ai-tutor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI 功课辅导助手：agent preset（引导式辅导人格 + 孩子安全工具白名单）。",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
