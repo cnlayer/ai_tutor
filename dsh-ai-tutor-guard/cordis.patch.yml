@@ -12,6 +12,8 @@
 #     blockedKeywords:
 #       - 陪我聊天
 #       - 打游戏
+#     purgeArchivedFiles: true   # 清空历史时物理删除会话日志文件（默认开）
+#     sessionsRoot: ""           # 留空自动取 $DSH_HOME/sessions；非默认布局才需填
 #
 # 保存即热生效（patchReload: live）。应用内设置表单需插件自带 client UI，尚未实现（见路线图）。
 

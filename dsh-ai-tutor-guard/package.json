@@ -1,11 +1,12 @@
 {
   "name": "@local/dsh-ai-tutor-guard",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "家长内容监护：定义允许的话题白名单（默认仅作业辅导），系统提示注入 + 消息级禁区拦截。",
+  "description": "家长内容监护：话题白名单系统提示注入 + 消息级禁区拦截 + 会话历史清理（归档后物理删除日志文件）。",
   "exports": {
-    ".": "./index.js"
+    ".": "./index.js",
+    "./client": "./client.js"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "~3.18.4"
@@ -13,6 +14,11 @@
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-workspace"]
     }
   }
 }
